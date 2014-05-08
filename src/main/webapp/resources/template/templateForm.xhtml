@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:p="http://primefaces.org/ui"
+      template="/resources/template/template.xhtml">
+
+	<ui:define name="body">
+		<f:metadata>
+			<f:event type="preRenderView"
+				listener="#{controller.initConversation}" />
+		</f:metadata>
+		
+		<p:panel>
+			<h:form id="formTemplate" prependId="false">
+				<p:tabView id="tabViewForm" dynamic="true" cache="false">
+					
+					<p:tab title="#{nome_tela}" id="tabList">
+
+						<p:panel id="panelCampos">
+							<ui:insert name="camposForm" />
+						</p:panel>
+
+						<br />
+						<div align="center">
+							<p:commandButton id="btnSalvar" value="Salvar" icon="save"
+								accesskey="s" title="Salvar registro. (Alt + S)"
+								rendered="#{controller.state eq 'EDIT' or controller.state eq 'INSERT'}"
+								action="#{controller.salvar()}" ajax="false"								
+								style="text-align: center; font-size-adjust: inherit; font-size: 8pt; height: 30px; width: 80px;" />
+							<p:spacer width="5px" />
+							<p:commandButton id="btnSalvarMais" value="Salvar+" accesskey="b"
+								title="Salvar e criar novo registro. (Alt + B)" icon="saveplus"
+								action="#{controller.salvarMais()}" ajax="false"
+								rendered="#{controller.state eq 'INSERT'}"
+								style="text-align: center; font-size-adjust: inherit; font-size: 8pt; height: 30px; width: 80px;" />
+							<p:spacer width="5px" />
+							<p:commandButton id="btnCancelar" value="Cancelar"
+								icon="cancelar" accesskey="c" title="Cancelar. (Alt + C)"
+								immediate="true" action="#{controller.cancel}" ajax="false"
+								style="text-align: center; font-size-adjust: inherit; font-size: 8pt; height: 30px; width: 80px;" />
+							<p:spacer width="5px" />
+							<ui:insert name="botoes_adicionais" />
+						</div>
+					</p:tab>
+								</p:tabView>
+			</h:form>
+		
+		
+		</p:panel>
+				
+		
+	
+	</ui:define>	
+</ui:composition>

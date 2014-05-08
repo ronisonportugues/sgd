@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+	<div id="tudo">
+		<div id="head">
+			<ui:include src="/menu.xhtml" />
+		</div>
+		<div id="conteudo">
+			<div id="body">
+				<div style="padding: 5px">
+					<p:messages id="messages" closable="true" />
+				</div>
+				<p:growl id="growl" showDetail="false" globalOnly="true" life="10000"
+					autoUpdate="true" />
+
+				<p:outputPanel>
+					<ui:insert name="body" />
+				</p:outputPanel>
+			</div>
+		</div>
+		<div id="rodape">
+			<ui:insert name="rodape" />
+		</div>
+	</div>
+</h:body>
+
+
+</html>

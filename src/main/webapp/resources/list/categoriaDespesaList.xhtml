@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/resources/template/templateList.xhtml">
+
+	<ui:param name="controller" value="#{categoriaDespesaController}" />
+	<ui:param name="nome_tela" value="Listagem de categorias" />
+	<ui:param name="exibe_botao_novo" value="true" />	
+	<ui:param name="exibe_botao_excluir" value="true" />
+	<ui:param name="exibe_botao_editar" value="true" />	
+	
+	
+	<ui:define name="data_table_principal">
+		<p:ajax event="rowSelect" global="false"/>
+		
+		<p:column id="dtIdCategoriaDespesa" headerText="Código Categoria" resizable="true" >
+			<h:outputText value="#{dt.id}" />
+		</p:column>	
+		
+		<p:column id="dtCategoriaDespesa" headerText="Descrição Categoria" resizable="true" >
+			<h:outputText value="#{dt.descricao}" />
+		</p:column>	
+	</ui:define>
+</ui:composition>
+
+
+</html>

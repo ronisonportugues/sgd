@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/resources/template/template.xhtml">
+
+	<ui:define name="body">
+
+		<f:metadata>
+			<f:event type="preRenderView"
+				listener="#{controller.initConversation}" />
+		</f:metadata>
+
+		<p:panel>
+			<h:form prependId="false" id="templateList">
+			
+				<p:tabView id="templateListTab" dynamic="true" cache="false">
+				
+					<p:tab title="#{nome_tela}" id="tabPrincipal">
+					
+						<div align="center">
+							<p:toolbar id="painelBotoes">
+								<p:toolbarGroup align="left" id="alignleft">
+									<p:commandButton id="btnNovo" value="Novo" icon="add"
+										accesskey="n" action="#{controller.create()}" ajax="false"
+										rendered="#{(empty exibe_botao_novo ? true : exibe_botao_novo)}"
+										style="text-align: center; font-size-adjust: inherit; font-size: 8pt; height: 30px; width: 80px;"
+										title="Criar novo registro. (Alt + N)" />
+
+									<p:commandButton id="btnEditar" value="Editar" icon="edit"
+										accesskey="x" action="#{controller.update()}" ajax="false"
+										rendered="#{(controller.objeto.id != null) and (empty exibe_botao_editar ? true : exibe_botao_editar)}"
+										style="text-align: center; font-size-adjust: inherit; font-size: 8pt; height: 30px; width: 80px;"
+										title="Editar registro. (Alt + X)" immediate="true" />
+
+									<p:commandButton id="btnApagar" value="Apagar" icon="delete"
+										accesskey="a" ajax="false"										
+										rendered="#{(controller.objeto.id != null) and (empty exibe_botao_apagar ? true : exibe_botao_apagar)}"
+										style="text-align: center; font-size-adjust: inherit; font-size: 8pt; height: 30px; width: 80px;"
+										title="Editar registro. (Alt + X)" onclick="confirm.show()" immediate="true" type="button"/>
+
+									<p:confirmDialog id="confirmation" widgetVar="confirm"
+									closable="false" 	message="Deseja realmente apagar este registro?" header="Confirmação de Exclusão"
+									severity="warning32">
+										<div align="center">
+											<p:commandButton id="conf" value="Sim" icon="ok16"
+												oncomplete="confirm.hide()"
+												action="#{controller.delete()}" ajax="false"
+												style="width:70px;" immediate="true" />
+											<p:commandButton id="decline" value="Não" icon="cancel16"
+												onclick="confirm.hide()" type="button"
+												style="width:70px;" immediate="true" />
+										</div>
+									</p:confirmDialog>
+								</p:toolbarGroup>
+							</p:toolbar>
+						</div>
+
+						<p:outputPanel id="painelPrincipal">
+							<div align="center">
+								<p:dataTable id="dataTable" value="#{controller.findAll()}"
+									var="dt" paginator="true" paginatorPosition="bottom"
+									rowKey="#{dt.id}" selectionMode="single" widgetVar="dtLazy"
+									lazy="true" selection="#{controller.objeto}" rows="5"
+									emptyMessage="Não há dados cadastrados">
+
+									<p:ajax event="rowSelect" global="false"
+										update="@form" />
+
+									<ui:insert name="data_table_principal" />
+
+
+								</p:dataTable>
+							</div>
+						</p:outputPanel>
+
+						<p:outputPanel id="panelGridDetalhes">
+							<div align="right" style="padding-top: 10px;">
+
+								<p:commandButton id="btnMostrarDetalhe" value="Mostrar Detalhes"
+									icon="detail16" rendered="#{controller.objeto.id != null}"
+									accesskey="t" action="#{controller.showFormDetail()}"
+									ajax="false"
+									style="text-align: center; font-size: 8pt; height: 30px; width: 150px;"
+									title="Mostrar detalhes (Alt + T)" />
+
+							</div>
+						</p:outputPanel>
+
+
+					</p:tab>
+				</p:tabView>
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>

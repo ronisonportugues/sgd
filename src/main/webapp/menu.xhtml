@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>	
+	<p:menubar>  
+	
+		<p:menuitem value="Home" url="/index.xhtml"/> 
+		    <p:submenu label="Cadastros" icon="ui-icon-document" >        
+            <p:submenu label="Categoria" icon="ui-icon-contact">  
+                <p:menuitem value="Categoria Despesa" url="/resources/list/categoriaDespesaList.xhtml" />  
+                <p:menuitem value="Other" url="/resources/forms/categoriaDespesaForm.xhtml" />  
+            </p:submenu>  
+            <p:menuitem value="Open" url="#" />  
+            <p:separator />  
+            <p:menuitem value="Quit" url="#" />  
+        </p:submenu>  
+  
+  
+        <f:facet name="options">  
+            <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />  
+        </f:facet>  
+    </p:menubar> 
+	</h:body>
+	
+	
+	
+</html>
